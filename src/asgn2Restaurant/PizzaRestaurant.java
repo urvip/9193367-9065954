@@ -174,6 +174,8 @@ return result;
 	 */
 	public void resetDetails(){
 		// TO DO
+		pizzas.clear();
+		customers.clear();
 	}
 
 }
