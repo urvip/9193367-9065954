@@ -19,7 +19,7 @@ import asgn2Exceptions.PizzaException;
  *  Any exceptions raised by one of the methods called by this class should be passed to asgn2GUIs.PizzaGUI so that it can be shown to
  *  the user.
  *
- * @author Urvi Patel and Hieu Vuong 
+ * @author Urvi Patel and Hieu Vuong
  *
  */
 public class PizzaRestaurant {
@@ -57,6 +57,24 @@ public class PizzaRestaurant {
 	 */
 	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException{
 		// TO DO
+		boolean haveOrdered = true;
+try {
+	customers = LogHandler.populateCustomerDataset(filename);
+	pizzas = LogHandler.populatePizzaDataset(filename);
+} catch (CustomerException a) {
+	haveOrdered = false;
+	System.out.println(a.getMessage());
+	a.printStackTrace();
+} catch (PizzaException a) {
+	haveOrdered = false;
+	System.out.println(a.getMessage());
+	a.printStackTrace();
+} catch (LogHandlerException a) {
+	haveOrdered = false;
+	System.out.println(a.getMessage());
+	a.printStackTrace();
+}
+return haveOrdered;
 	}
 
 	/**
@@ -67,6 +85,9 @@ public class PizzaRestaurant {
 	 */
 	public Customer getCustomerByIndex(int index) throws CustomerException{
 		// TO DO
+		if (customers.size() < 0 || index <= 0)
+			throw new CustomerException("Error: Invalid index number");
+		return customers.get(index-1);
 	}
 
 	/**
@@ -97,6 +118,16 @@ public class PizzaRestaurant {
 	 */
 	public int getNumCustomerOrders(){
 		// TO DO
+		try {
+	if (customers.size() == 0)
+		throw new CustomerException("Error: No customers");
+} catch (CustomerException e) {
+	System.out.println(e.getMessage());
+	e.printStackTrace();
+}
+
+
+return customers.size();
 	}
 
 
