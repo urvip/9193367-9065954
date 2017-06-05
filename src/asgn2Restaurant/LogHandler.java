@@ -86,6 +86,15 @@ public class LogHandler {
 	 */
 	public static Customer createCustomer(String line) throws CustomerException, LogHandlerException{
 		// TO DO
+		checkLine(line);
+	String[] cArr = line.split(COMMA);
+	String name = cArr[2];
+	String mobileNumber = cArr[3];
+	String customerCode = cArr[4];
+	int x = Integer.parseInt(cArr[5]);
+	int y = Integer.parseInt(cArr[6]);
+
+	return CustomerFactory.getCustomer(customerCode, name, mobileNumber, x, y);
 	}
 
 	/**
