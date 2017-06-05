@@ -139,6 +139,20 @@ return customers.size();
 	 */
 	public double getTotalDeliveryDistance(){
 		// TO DO
+		double result = 0;
+try { //in case if there is no customers
+	if (customers.size() == 0)
+		throw new CustomerException("Error: No customers/orders");
+} catch (CustomerException e) {
+	System.out.println(e.getMessage());
+	e.printStackTrace();
+}
+
+for (Customer customer : customers) {
+	if (customer.getCustomerType().equals("DNC") || customer.getCustomerType().equals("DVC"))
+		result += customer.getDeliveryDistance();
+}
+return result;
 	}
 
 	/**
