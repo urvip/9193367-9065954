@@ -51,7 +51,7 @@ public class DriverDeliveryCustomer extends Customer {
 	 */
 	@Override
 	public double getDeliveryDistance() {
-		DecimalFormat df = new DecimalFormat("#.00");
+		DecimalFormat df = new DecimalFormat("#.0");
 		df.setRoundingMode(RoundingMode.CEILING);
 		double result = Math.abs((double) locationX) + Math.abs((double) locationY);
 		return Double.parseDouble(df.format(result));

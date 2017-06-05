@@ -52,7 +52,7 @@ public class DroneDeliveryCustomer extends Customer {
 	@Override
 	public double getDeliveryDistance() {
 		// TO DO
-		DecimalFormat df = new DecimalFormat("#.00");
+		DecimalFormat df = new DecimalFormat("#.0");
 		df.setRoundingMode(RoundingMode.CEILING);
 		double result = Math.sqrt(Math.pow((double) locationX, 2) + Math.pow((double) locationY, 2));
 		return Double.parseDouble(df.format(result));
