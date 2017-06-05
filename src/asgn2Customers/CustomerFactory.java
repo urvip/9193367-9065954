@@ -11,9 +11,9 @@ import asgn2Customers.PickUpCustomer;
 /**
  * A class that instantiates the subclasses of asgn2Customers.Customer using the Factory Method pattern.
  * The classes are instantiated from one of the three valid customer codes outlined in
- * Section 5.3 of the Assignment Specification. Any other code will throw a CustomerException.   
+ * Section 5.3 of the Assignment Specification. Any other code will throw a CustomerException.
  *
- * @author Person B
+ * @author Hieu Vuong
  *
  */
 
