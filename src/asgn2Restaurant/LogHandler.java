@@ -24,7 +24,7 @@ import java.time.LocalTime;
  * and Customer object - either as an individual Pizza/Customer object or as an
  * ArrayList of Pizza/Customer objects.
  *
- * @author Person A and Person B
+ * @author Urvi Patel and Hieu Vuong
  *
  */
 public class LogHandler {
@@ -41,6 +41,26 @@ public class LogHandler {
 	 */
 	public static ArrayList<Customer> populateCustomerDataset(String filename) throws CustomerException, LogHandlerException{
 		// TO DO
+		ArrayList<Customer> customerList = new ArrayList<Customer>();
+		try {
+			BufferedReader info = new BufferedReader(new FileReader(filename));
+			String line = info.readLine();
+			while (line != null) {
+				customerList.add(createCustomer(line));
+				line = info.readLine();
+			}
+			info.close();
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			throw new LogHandlerException("Error: File not found");
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			throw new LogHandlerException("Error: Reader cannot parse the given log file");
+		}
+
+		return customerList;
 	}
 
 	/**
