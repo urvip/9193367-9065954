@@ -60,23 +60,23 @@ public class PizzaRestaurant {
 	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException{
 		// TO DO
 		boolean haveOrdered = true;
-try {
-	customers = LogHandler.populateCustomerDataset(filename);
-	pizzas = LogHandler.populatePizzaDataset(filename);
-} catch (CustomerException a) {
-	haveOrdered = false;
-	System.out.println(a.getMessage());
-	a.printStackTrace();
-} catch (PizzaException a) {
-	haveOrdered = false;
-	System.out.println(a.getMessage());
-	a.printStackTrace();
-} catch (LogHandlerException a) {
-	haveOrdered = false;
-	System.out.println(a.getMessage());
-	a.printStackTrace();
-}
-return haveOrdered;
+		try {
+			customers = LogHandler.populateCustomerDataset(filename);
+			pizzas = LogHandler.populatePizzaDataset(filename);
+		} catch (CustomerException a) {
+			haveOrdered = false;
+			System.out.println(a.getMessage());
+			a.printStackTrace();
+		} catch (PizzaException a) {
+			haveOrdered = false;
+			System.out.println(a.getMessage());
+			a.printStackTrace();
+		} catch (LogHandlerException a) {
+			haveOrdered = false;
+			System.out.println(a.getMessage());
+			a.printStackTrace();
+		}
+		return haveOrdered;
 	}
 
 	/**
@@ -100,6 +100,9 @@ return haveOrdered;
 	 */
 	public Pizza getPizzaByIndex(int index) throws PizzaException{
 		// TO DO
+		if (pizzas.size() < 0 || index <= 0)
+			throw new PizzaException("Error: Invalid index number");
+		return pizzas.get(index-1);
 	}
 
 	/**
@@ -110,6 +113,14 @@ return haveOrdered;
 	 */
 	public int getNumPizzaOrders(){
 		// TO DO
+		try {
+			if (pizzas.size() == 0)
+				throw new CustomerException("Error: No pizzas ordered");
+		} catch (CustomerException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		return pizzas.size();
 	}
 
 	/**
@@ -121,17 +132,16 @@ return haveOrdered;
 	public int getNumCustomerOrders(){
 		// TO DO
 		try {
-	if (customers.size() == 0)
-		throw new CustomerException("Error: No customers");
-} catch (CustomerException e) {
-	System.out.println(e.getMessage());
-	e.printStackTrace();
-}
+			if (customers.size() == 0)
+				throw new CustomerException("Error: No customers");
+		} catch (CustomerException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
 
 
-return customers.size();
+		return customers.size();
 	}
-
 
 
 	/**
@@ -142,19 +152,19 @@ return customers.size();
 	public double getTotalDeliveryDistance(){
 		// TO DO
 		double result = 0;
-try { //in case if there is no customers
-	if (customers.size() == 0)
-		throw new CustomerException("Error: No customers/orders");
-} catch (CustomerException e) {
-	System.out.println(e.getMessage());
-	e.printStackTrace();
-}
+		try { //in case if there is no customers
+			if (customers.size() == 0)
+				throw new CustomerException("Error: No customers/orders");
+		} catch (CustomerException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
 
-for (Customer customer : customers) {
-	if (customer.getCustomerType().equals("DNC") || customer.getCustomerType().equals("DVC"))
-		result += customer.getDeliveryDistance();
-}
-return result;
+		for (Customer customer : customers) {
+			if (customer.getCustomerType().equals("DNC") || customer.getCustomerType().equals("DVC"))
+				result += customer.getDeliveryDistance();
+		}
+		return result;
 	}
 
 	/**
@@ -164,6 +174,18 @@ return result;
 	 */
 	public double getTotalProfit(){
 		// TO DO
+		double profit = 0;
+		try { //in case if there is no pizza orders
+			if (pizzas.size() == 0)
+				throw new PizzaException("Error: No pizzas ordered");
+		} catch (PizzaException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		for (int i = 0; i < pizzas.size(); i++) {
+			profit += pizzas.get(i).getOrderProfit();
+		}
+		return profit;
 	}
 
 	/**
